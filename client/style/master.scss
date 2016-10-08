@@ -1,8 +1,11 @@
 @import './constants.scss';
 
+body {
+    background-color: $off-white;
+}
 #app-root {
-    div.hello-world {
-        background-color: $primary;
-        font-family: $font1;
+    div#App {
+        background-color: $white;
+        padding: 100px;
     }
 }

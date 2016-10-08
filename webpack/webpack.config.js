@@ -30,9 +30,7 @@ module.exports = {
 		contentBase: SETTINGS.OUTDIR,
 		noInfo: true,
 		hot: true,
-		inline: true,
-		port: SETTINGS.PORT,
-		host: SETTINGS.HOST
+		inline: true
 	},
 	plugins: [
 		new webpack.NoErrorsPlugin(),
@@ -42,5 +40,6 @@ module.exports = {
 				from: path.join(SETTINGS.SRCDIR, 'index.html')
 			}
 		]),
-	]
+	],
+	_port: 9000
 };

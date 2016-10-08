@@ -1,22 +1,19 @@
-const PORT = (process.env.PORT || 9000)
-
 var express = require('express');
-var body_parser = require('body-parser');
-
-var app = express();
-
-app.use(body_parser.urlencoded({ extended: true }));
-app.use(body_parser.json())
-
 var webpack = require('webpack');
 var webpackDevMiddleware = require('webpack-dev-middleware');
 var webpackHotMiddleware = require('webpack-hot-middleware');
+
 var config = require('./webpack/webpack.config.js');
+const PORT = config._port;
+
+var app = express();
 var compiler = webpack(config);
 
 app.use(webpackDevMiddleware(compiler, {
     stats: {
-        colors: true
+        colors: true,
+        hash: false,
+        chunks: false,
     }
 }));
 
