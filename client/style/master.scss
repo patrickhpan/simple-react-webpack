@@ -1,0 +1,8 @@
+@import './constants.scss';
+
+#app-root {
+    div.hello-world {
+        background-color: $primary;
+        font-family: $font1;
+    }
+}
