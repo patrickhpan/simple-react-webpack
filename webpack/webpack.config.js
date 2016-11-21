@@ -1,7 +1,11 @@
-var webpack = require('webpack');
-var path = require('path');
-var loaders = require('./webpack.loaders');
-var CopyWebpackPlugin = require('copy-webpack-plugin');
+const fs = require('fs');
+const dotenv = require('dotenv');
+const webpack = require('webpack');
+const path = require('path');
+const loaders = require('./webpack.loaders');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
+
+const envFile = fs.readFileSync('.env', 'utf8');
 
 const SETTINGS = {
 	DEVTOOL: process.env.WEBPACK_DEVTOOL || 'source-map',
@@ -35,11 +39,18 @@ module.exports = {
 	plugins: [
 		new webpack.NoErrorsPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
-		new CopyWebpackPlugin([
-			{
-				from: path.join(SETTINGS.SRCDIR, 'index.html')
-			}
-		]),
+		new CopyWebpackPlugin([{
+			from: path.join(SETTINGS.SRCDIR, 'index.html')
+		}]),
+		new webpack.DefinePlugin({
+			'process.env': JSON.stringify(dotenv.parse(envFile))
+		})
 	],
+	node: {
+		fs: 'empty',
+		net: 'empty',
+		tls: 'empty',
+		dns: 'empty'
+	},
 	_port: 9000
 };
