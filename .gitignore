@@ -38,3 +38,9 @@ jspm_packages
 
 # Webpack build directory
 build
+
+# Environment file
+.env
+
+# OS X files
+.DS_Store
