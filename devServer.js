@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 3000;
 
 const express = require('express');
 const chokidar = require('chokidar');
+const path = require('path')
 const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
@@ -26,11 +27,11 @@ const loadServer = () => {
     try {
         server = require('./server/entry');
         serverLoadError = null;
-        console.log("Successfully loaded server!");
+        return Promise.resolve()
     } catch (e) {
         serverLoadError = e.toString();
-        console.error("Error loading server: " + serverLoadError);
         server = null;
+        return Promise.reject(serverLoadError)
     }
 };
 
@@ -41,13 +42,20 @@ serverWatch.on('ready', () => {
     loadServer();
 
     // Reload the server on any change
-    serverWatch.on('all', () => {
-        console.log("Reloading server");
+    serverWatch.on('all', (type, path) => {
+        console.log(path + " was changed")
         // Fully re-require server
         if (server !== null) {
             emptyCache(server.context);
         }
-        loadServer();
+        loadServer()
+            .then(() => {
+                console.log("Reloaded server!")
+            })
+            .catch(e => {
+                console.error("Failed to reload server: " + e.toString())
+            })
+            
     });
 });
 
@@ -63,14 +71,34 @@ app.use((req, res, next) => {
 
 // Add webpack middlewares
 app.use(webpackDevMiddleware(compiler, {
-    stats: {
-        colors: true,
-        hash: false,
-        chunks: false,
-    }
+    noInfo: true,
+    reporter: info => {
+        const { stats } = info;
+        if (!stats) { 
+            return;
+        }
+        const { compilation, startTime, endTime } = stats;
+        require('fs').writeFileSync(`${+new Date}.webpack.log`, require('util').inspect(compilation), 'utf8')
+        const { errors, hash, compiler } = compilation;
+        const shortHash = hash.slice(0, 6);
+        const duration = endTime - startTime;
+        const { fileTimestamps } = compilation;
+        const changedFiles = Object.entries(fileTimestamps)
+            .filter(([fname, ts]) => (ts > startTime))
+            .map(([fname]) => path.relative(compiler.options.entry[compiler.options.entry.length - 1] + "/..", fname))
+        console.log(...changedFiles, " was changed");
+        if (errors.length === 0) {
+            console.log(`Webpack built ${shortHash} in ${duration} ms.`)
+        } else {
+            console.log(`Webpack built ${shortHash} in ${duration} ms with errors:`) 
+            errors.forEach(e => {
+                console.error(e.toString().split('\n')[0])
+            })
+        }
+    } 
 }));
 app.use(webpackHotMiddleware(compiler, {
-    log: console.log,
+    log: false,
 }));
 
 // Set app to listen on specified port
