@@ -1,8 +1,7 @@
 const fs = require('fs');
-const dotenv = require('dotenv');
 const webpack = require('webpack');
 const path = require('path');
-const loaders = require('./webpack.loaders');
+const rules = require('./webpack.rules');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const SETTINGS = {
@@ -19,10 +18,10 @@ module.exports = {
 		filename: 'bundle.js',
 	},
 	resolve: {
-		extensions: ['', '.js', '.jsx'],
+		extensions: ['.js', '.jsx'],
 	},
 	module: {
-		loaders: loaders,
+		rules,
 	},
 	plugins: [
 		new CopyWebpackPlugin([{

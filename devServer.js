@@ -1,6 +1,8 @@
 // Load environment variables
 require('dotenv').config();
 
+const PORT = process.env.PORT || 3000;
+
 const express = require('express');
 const chokidar = require('chokidar');
 const webpack = require('webpack');
@@ -13,7 +15,6 @@ const app = express();
 
 // Import webpack configuration
 const config = require('./webpack/webpack.config.js');
-const PORT = process.env.PORT || config._port;
 const compiler = webpack(config);
 
 // Server starts initially unloaded

@@ -1,7 +1,7 @@
 const fs = require('fs');
 const webpack = require('webpack');
 const path = require('path');
-const loaders = require('./webpack.loaders');
+const rules = require('./webpack.rules');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const SETTINGS = {
@@ -22,10 +22,10 @@ module.exports = {
 		filename: 'bundle.js',
 	},
 	resolve: {
-		extensions: ['', '.js', '.jsx'],
+		extensions: ['.js', '.jsx'],
 	},
 	module: {
-		loaders: loaders,
+		rules,
 	},
 	devServer: {
 		contentBase: SETTINGS.OUTDIR,
@@ -34,7 +34,7 @@ module.exports = {
 		inline: true,
 	},
 	plugins: [
-		new webpack.NoErrorsPlugin(),
+		new webpack.NoEmitOnErrorsPlugin(),
 		new webpack.HotModuleReplacementPlugin(),
 		new CopyWebpackPlugin([{
 			from: path.join(SETTINGS.SRCDIR, 'index.html')
@@ -46,5 +46,4 @@ module.exports = {
 		tls: 'empty',
 		dns: 'empty',
 	},
-	_port: 9000,
 };
