@@ -4,7 +4,7 @@
   "main": "prodServer.js",
   "scripts": {
     "build": "webpack -p --config webpack/webpack.config.prod.js --progress --profile --colors",
-    "dev": "node devServer.js",
+    "dev": "DEBUG=http,build* node devServer.js",
     "deploy": "npm run build && node prodServer.js"
   },
   "dependencies": {
