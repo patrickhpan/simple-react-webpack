@@ -5,7 +5,7 @@ import Strings from '../json/strings.json';
 
 class About extends React.Component {
     render() {
-        return <div className="About">
+        return <div id="About">
             {Strings.About.body}
             <br />
             <Link to="/">{Strings.About.link}</Link>

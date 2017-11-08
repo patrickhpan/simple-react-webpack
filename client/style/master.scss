@@ -5,7 +5,24 @@ body {
 }
 #app-root {
     div#App {
-        background-color: $white;
         padding: 100px;
+        background-color: $white;
+
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start; 
     }
+}
+
+#Logout {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.button {
+    cursor: pointer;
+    padding: 1em;
+    background-color: rgba($primary, 0.3);
+    border-radius: 0.25em;
 }

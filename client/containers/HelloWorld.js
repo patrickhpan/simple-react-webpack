@@ -6,9 +6,9 @@ const mapStateToProps = (state, ownProps) => ({
 })
 
 
-const mapDispatchToProps = (dispatch, ownProps) => ({
-
-})
+const mapDispatchToProps = {
+    
+}
 
 const HelloWorld = connect(mapStateToProps, mapDispatchToProps)(_HelloWorld);
 export default HelloWorld;
