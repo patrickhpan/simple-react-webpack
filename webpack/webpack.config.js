@@ -1,11 +1,8 @@
 const fs = require('fs');
-const dotenv = require('dotenv');
 const webpack = require('webpack');
 const path = require('path');
 const loaders = require('./webpack.loaders');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
-
-const envFile = fs.readFileSync('.env', 'utf8');
 
 const SETTINGS = {
 	DEVTOOL: process.env.WEBPACK_DEVTOOL || 'source-map',

@@ -5,8 +5,6 @@ const path = require('path');
 const loaders = require('./webpack.loaders');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 
-const envFile = fs.readFileSync('.env', 'utf8');
-
 const SETTINGS = {
 	SRCDIR: path.join(__dirname, '..', 'client'),
 	OUTDIR: path.join(__dirname, '..', 'build'),
