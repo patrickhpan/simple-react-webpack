@@ -1,6 +1,6 @@
 {
     "HelloWorld": {
-        "body": "Hello World!",
+        "body": "Hello World! Here's a counter.",
         "link": "About"
     },
     "About": {
@@ -12,5 +12,9 @@
     },
     "Logout": {
         "link": "Logout!"
+    },
+    "Counter": {
+        "increment": "+",
+        "decrement": "-"
     }
 }

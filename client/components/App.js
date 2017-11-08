@@ -10,7 +10,7 @@ class App extends React.Component {
         const content = isLoggedIn === true ?
             [
                 children,
-                <Logout />
+                <Logout />,
             ] :
             <Login />
 
