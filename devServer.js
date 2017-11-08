@@ -11,6 +11,11 @@ const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const emptyCache = require('require-reload').emptyCache;
 
+const logHTTP = require('debug')('http');
+const logBuildClient = require('debug')('build:client')
+const logBuildServer = require('debug')('build:server');
+const logBuildError = require('debug')('build:error');
+
 // Initialize express app
 const app = express();
 
@@ -43,17 +48,14 @@ serverWatch.on('ready', () => {
 
     // Reload the server on any change
     serverWatch.on('all', (type, path) => {
-        console.log(path + " was changed")
+        logBuildServer("Detected change:", path)
         // Fully re-require server
         if (server !== null) {
             emptyCache(server.context);
         }
         loadServer()
-            .then(() => {
-                console.log("Reloaded server!")
-            })
             .catch(e => {
-                console.error("Failed to reload server: " + e.toString())
+                logBuildError("Failed to reload server: " + e.toString())
             })
             
     });
@@ -65,7 +67,7 @@ app.use((req, res, next) => {
     if (serverLoadError !== null) {
         return res.status(500).end("Server load error: " + serverLoadError);
     }
-    
+    logHTTP(`HTTP ${req.method} ${req.originalUrl}`);
     server(req, res, next);
 });
 
@@ -86,13 +88,17 @@ app.use(webpackDevMiddleware(compiler, {
         const changedFiles = Object.entries(fileTimestamps)
             .filter(([fname, ts]) => (ts > startTime))
             .map(([fname]) => path.relative(compiler.options.entry[compiler.options.entry.length - 1] + "/..", fname))
-        console.log(...changedFiles, " was changed");
+            
+        
+        if (changedFiles.length !== 0) {
+            logBuildClient("Detected change: " + changedFiles.join(", "));
+        }
         if (errors.length === 0) {
-            console.log(`Webpack built ${shortHash} in ${duration} ms.`)
+            logBuildClient(`Webpack built ${shortHash} in ${duration} ms.`)
         } else {
-            console.log(`Webpack built ${shortHash} in ${duration} ms with errors:`) 
+            logBuildClient(`Webpack built ${shortHash} in ${duration} ms with errors:`) 
             errors.forEach(e => {
-                console.error(e.toString().split('\n')[0])
+                logBuildError(e.toString().split('\n')[0])
             })
         }
     } 
