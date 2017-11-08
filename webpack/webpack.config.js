@@ -39,6 +39,7 @@ module.exports = {
 		new CopyWebpackPlugin([{
 			from: path.join(SETTINGS.SRCDIR, 'index.html')
 		}]),
+		new webpack.optimize.ModuleConcatenationPlugin(),
 	],
 	node: {
 		fs: 'empty',

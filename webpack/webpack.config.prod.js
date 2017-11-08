@@ -32,6 +32,7 @@ module.exports = {
 				NODE_ENV: 'production',
 			}),
 		}),
+		new webpack.optimize.ModuleConcatenationPlugin()
 	],
 	node: {
 		fs: 'empty',
