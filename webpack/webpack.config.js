@@ -14,7 +14,7 @@ module.exports = {
 	entry: [
 		'webpack/hot/dev-server',
 		'webpack-hot-middleware/client',
-		path.join(SETTINGS.SRCDIR, 'bundle.jsx'),
+		path.join(SETTINGS.SRCDIR, 'bundle.js'),
 	],
 	devtool: SETTINGS.DEVTOOL,
 	output: {
@@ -22,7 +22,7 @@ module.exports = {
 		filename: 'bundle.js',
 	},
 	resolve: {
-		extensions: ['.js', '.jsx'],
+		extensions: ['.js'],
 	},
 	module: {
 		rules,

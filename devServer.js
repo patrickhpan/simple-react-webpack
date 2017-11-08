@@ -10,11 +10,13 @@ const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const emptyCache = require('require-reload').emptyCache;
+const request = require('request');
+const debug = require('debug');
 
-const logHTTP = require('debug')('http');
-const logBuildClient = require('debug')('build:client')
-const logBuildServer = require('debug')('build:server');
-const logBuildError = require('debug')('build:error');
+const logHTTP = debug('http');
+const logBuildClient = debug('build:client')
+const logBuildServer = debug('build:server');
+const logBuildError = debug('build:error');
 
 // Initialize express app
 const app = express();
@@ -72,7 +74,7 @@ app.use((req, res, next) => {
 });
 
 // Add webpack middlewares
-app.use(webpackDevMiddleware(compiler, {
+const devMiddleware = webpackDevMiddleware(compiler, {
     noInfo: true,
     reporter: info => {
         const { stats } = info;
@@ -101,10 +103,12 @@ app.use(webpackDevMiddleware(compiler, {
             })
         }
     } 
-}));
+})
+app.use(devMiddleware);
 app.use(webpackHotMiddleware(compiler, {
     log: false,
 }));
+app.use('*', devMiddleware);
 
 // Set app to listen on specified port
 app.listen(PORT, function() {

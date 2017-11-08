@@ -11,14 +11,14 @@ const SETTINGS = {
 
 module.exports = {
 	entry: [
-		path.join(SETTINGS.SRCDIR, 'bundle.jsx'),
+		path.join(SETTINGS.SRCDIR, 'bundle.js'),
 	],
 	output: {
 		path: SETTINGS.OUTDIR,
 		filename: 'bundle.js',
 	},
 	resolve: {
-		extensions: ['.js', '.jsx'],
+		extensions: ['.js'],
 	},
 	module: {
 		rules,
