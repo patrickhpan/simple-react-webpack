@@ -10,7 +10,6 @@ const webpack = require('webpack');
 const webpackDevMiddleware = require('webpack-dev-middleware');
 const webpackHotMiddleware = require('webpack-hot-middleware');
 const emptyCache = require('require-reload').emptyCache;
-const request = require('request');
 const debug = require('debug');
 
 const logHTTP = debug('http');
