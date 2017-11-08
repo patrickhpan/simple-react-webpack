@@ -31,7 +31,7 @@ const loadServer = () => {
         console.error("Error loading server: " + serverLoadError);
         server = null;
     }
-}
+};
 
 // Listen for change in server
 const serverWatch = chokidar.watch('./server/**/*.*');
@@ -47,7 +47,7 @@ serverWatch.on('ready', () => {
             emptyCache(server.context);
         }
         loadServer();
-    })
+    });
 });
 
 // Handle server requests
@@ -57,7 +57,7 @@ app.use((req, res, next) => {
         return res.status(500).end("Server load error: " + serverLoadError);
     }
     
-    server(req, res, next)
+    server(req, res, next);
 });
 
 // Add webpack middlewares
