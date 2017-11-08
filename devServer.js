@@ -80,7 +80,6 @@ app.use(webpackDevMiddleware(compiler, {
             return;
         }
         const { compilation, startTime, endTime } = stats;
-        require('fs').writeFileSync(`${+new Date}.webpack.log`, require('util').inspect(compilation), 'utf8')
         const { errors, hash, compiler } = compilation;
         const shortHash = hash.slice(0, 6);
         const duration = endTime - startTime;
