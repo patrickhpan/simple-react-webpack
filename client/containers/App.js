@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import _App from '../components/App';
+import _App from 'components/App';
 import { selectors as userSelectors } from '../modules/user';
 
 const { isLoggedIn } = userSelectors;

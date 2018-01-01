@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Login from '../containers/Login';
-import Logout from '../containers/Logout';
+import Login from 'containers/Login';
+import Logout from 'containers/Logout';
 
 class App extends React.Component {
     render() {

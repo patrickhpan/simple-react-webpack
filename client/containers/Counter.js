@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
-import _Counter from '../components/Counter';
+import _Counter from 'components/Counter';
 import {
     selectors as counterSelectors,
     operations as counterOperations
-} from '../modules/counter';
+} from 'modules/counter';
 
 const { getCount } = counterSelectors;
 const { increment, decrement } = counterOperations;

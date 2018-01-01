@@ -3,13 +3,13 @@ import ReactDOM from 'react-dom';
 
 import { Provider } from 'react-redux';
 import { ConnectedRouter } from 'react-router-redux';
-import store, { history } from './store';
+import store, { history } from 'store';
 import { withRouter } from 'react-router';
 import { Switch } from 'react-router-dom';
-import App from './containers/App';
-import routes from './routes';
+import App from 'containers/App';
+import routes from 'routes';
 
-import './style/master.scss';
+import 'style/master.scss';
 
 const RoutedApp = withRouter(App)
 

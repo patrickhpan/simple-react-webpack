@@ -1,9 +1,9 @@
 import { connect } from 'react-redux';
-import _Logout from '../components/Logout';
+import _Logout from 'components/Logout';
 import {
     selectors as userSelectors,
     operations as userOperations
-} from '../modules/user';
+} from 'modules/user';
 
 const { getUserId } = userSelectors;
 const { logout } = userOperations;

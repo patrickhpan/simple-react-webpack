@@ -1,6 +1,6 @@
 import { connect } from 'react-redux';
-import _Login from '../components/Login';
-import { operations as userOperations } from '../modules/user';
+import _Login from 'components/Login';
+import { operations as userOperations } from 'modules/user';
 
 const { login } = userOperations;
 

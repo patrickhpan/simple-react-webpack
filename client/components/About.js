@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import Strings from '../json/strings.json';
+import Strings from 'json/strings.json';
 
 class About extends React.Component {
     render() {
