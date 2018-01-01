@@ -1,7 +1,7 @@
-const LOGIN = 'auth/login'
-const LOGOUT = 'auth/logout'
+const login = 'auth/login'
+const logout = 'auth/logout'
 
 export {
-    LOGIN,
-    LOGOUT
+    login,
+    logout
 }

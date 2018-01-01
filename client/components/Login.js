@@ -5,9 +5,12 @@ import strings from 'json/strings.json';
 
 class Login extends React.Component {
     render() {
-        const { login } = this.props
+        const { login, isLoggingIn } = this.props
+        const contents = isLoggingIn === true ?
+            <div>Attempting to log in...</div> :
+            <div className="button" children={strings.Login.link} onClick={login} />;
         return <div id="Login">
-            <div className="button" children={strings.Login.link} onClick={login} />
+            { contents }
         </div>
     }
 }

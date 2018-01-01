@@ -1,0 +1,1 @@
+export default elements => elements.map((el, i) => ({ ...el, key: ( el.key ? el.key : i ) }))

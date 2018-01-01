@@ -1,7 +1,7 @@
-const INCREMENT = 'auth/increment'
-const DECREMENT = 'auth/decrement'
+const increment = 'counter/increment'
+const decrement = 'counter/decrement'
 
 export {
-    INCREMENT,
-    DECREMENT
+    increment,
+    decrement
 }

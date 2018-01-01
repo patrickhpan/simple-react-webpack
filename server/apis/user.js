@@ -1,6 +1,6 @@
 const uuid = require('uuid')
 
-const login = () => ({
+const login = () => Promise.resolve({
     id: uuid()
 })
 

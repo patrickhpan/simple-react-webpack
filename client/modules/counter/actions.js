@@ -1,11 +1,11 @@
 import * as types from './types';
 
 const increment = () => ({
-    type: types.INCREMENT
+    type: types.increment
 })
 
 const decrement = () => ({
-    type: types.DECREMENT
+    type: types.decrement
 })
 
 export {
