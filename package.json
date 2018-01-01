@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "main": "prodServer.js",
   "scripts": {
-    "build": "webpack -p --config webpack/webpack.config.prod.js --progress --profile --colors",
+    "build": "NODE_ENV=production webpack -p --config webpack.config.js --progress --profile --colors",
     "dev": "DEBUG=http,build* node devServer.js",
     "deploy": "npm run build && node prodServer.js"
   },

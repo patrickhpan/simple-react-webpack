@@ -21,7 +21,7 @@ const logBuildError = debug('build:error');
 const app = express();
 
 // Import webpack configuration
-const config = require('./webpack/webpack.config.js');
+const config = require('./webpack.config.js');
 const compiler = webpack(config);
 
 // Server starts initially unloaded
